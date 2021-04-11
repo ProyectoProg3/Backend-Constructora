@@ -4,7 +4,18 @@ import {Proyecto} from './proyecto.model';
 import {Usuario} from './usuario.model';
 import {Cliente} from './cliente.model';
 
-@model()
+@model({
+  settings: {
+    foreignKeys: {
+      fk_pais_id: {
+        name: 'fk_pais_id',
+        entity: 'Pais',
+        entityKey: 'id',
+        foreignKey: 'paisId',
+      },
+    },
+  },
+})
 export class Ciudad extends Entity {
   @property({
     type: 'number',

@@ -4,7 +4,32 @@ import {Inmueble} from './inmueble.model';
 import {Pago} from './pago.model';
 import {EstadoSolicitud} from './estado-solicitud.model';
 
-@model()
+@model({
+  settings: {
+    foreignKeys: {
+      fk_inmueble_id: {
+        name: 'fk_inmueble_id',
+        entity: 'Inmueble',
+        entityKey: 'id',
+        foreignKey: 'inmuebleId',
+      },
+      
+      fk_cliente_id: {
+        name: 'fk_cliente_id',
+        entity: 'Cliente',
+        entityKey: 'id',
+        foreignKey: 'clienteId',
+      },
+
+      fk_estado_id: {
+        name: 'fk_estado_id',
+        entity: 'EstadoSolicitud',
+        entityKey: 'id',
+        foreignKey: 'estadoSolicitudId',
+      },
+    },
+  },
+})
 export class SolicitudClienteInmueble extends Entity {
   @property({
     type: 'number',

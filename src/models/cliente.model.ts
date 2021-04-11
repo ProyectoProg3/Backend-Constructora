@@ -3,7 +3,18 @@ import {Ciudad} from './ciudad.model';
 import {SolicitudClienteInmueble} from './solicitud-cliente-inmueble.model';
 import {InfoFinanciera} from './info-financiera.model';
 
-@model()
+@model({
+  settings: {
+    foreignKeys: {
+      fk_ciudad_id: {
+        name: 'fk_ciudad_cliente_id',
+        entity: 'Ciudad',
+        entityKey: 'id',
+        foreignKey: 'ciudadId',
+      },
+    },
+  },
+})
 export class Cliente extends Entity {
   @property({
     type: 'number',
