@@ -1,4 +1,4 @@
-import {Entity, model, property, belongsTo, hasMany} from '@loopback/repository';
+import {belongsTo, Entity, hasMany, model, property} from '@loopback/repository';
 import {Bloque} from './bloque.model';
 import {SolicitudClienteInmueble} from './solicitud-cliente-inmueble.model';
 
@@ -9,7 +9,7 @@ import {SolicitudClienteInmueble} from './solicitud-cliente-inmueble.model';
         name: 'fk_bloque_id',
         entity: 'Bloque',
         entityKey: 'id',
-        foreignKey: 'BloqueId',
+        foreignKey: 'bloqueId',
       },
     },
   },

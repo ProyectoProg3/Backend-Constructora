@@ -1,4 +1,4 @@
-import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {belongsTo, Entity, model, property} from '@loopback/repository';
 import {SolicitudClienteInmueble} from './solicitud-cliente-inmueble.model';
 
 @model({
@@ -8,7 +8,7 @@ import {SolicitudClienteInmueble} from './solicitud-cliente-inmueble.model';
         name: 'fk_solicitud_id',
         entity: 'Solicitud',
         entityKey: 'id',
-        foreignKey: 'solicitudId',
+        foreignKey: 'solicitudClienteInmuebleId',
       },
     },
   },

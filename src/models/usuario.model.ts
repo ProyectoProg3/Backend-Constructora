@@ -1,6 +1,6 @@
-import {Entity, model, property, belongsTo} from '@loopback/repository';
-import {Rol} from './rol.model';
+import {belongsTo, Entity, model, property} from '@loopback/repository';
 import {Ciudad} from './ciudad.model';
+import {Rol} from './rol.model';
 
 @model({
   settings: {
@@ -11,7 +11,7 @@ import {Ciudad} from './ciudad.model';
         entityKey: 'id',
         foreignKey: 'ciudadId',
       },
-      
+
       fk_rol_id: {
         name: 'fk_rol_id',
         entity: 'Rol',
