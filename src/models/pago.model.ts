@@ -6,7 +6,7 @@ import {SolicitudClienteInmueble} from './solicitud-cliente-inmueble.model';
     foreignKeys: {
       fk_solicitud_id: {
         name: 'fk_solicitud_id',
-        entity: 'Solicitud',
+        entity: 'SolicitudClienteInmueble',
         entityKey: 'id',
         foreignKey: 'solicitudClienteInmuebleId',
       },
