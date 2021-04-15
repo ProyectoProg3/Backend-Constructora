@@ -10,3 +10,4 @@ export * from './solicitud-cliente-inmueble.model';
 export * from './pago.model';
 export * from './estado-solicitud.model';
 export * from './info-financiera.model';
+export * from './credenciales.model';
