@@ -101,7 +101,7 @@ export class UsuarioController {
     restablecerContrasena: RestablecerContrasena,
   ): Promise<Object> {
 
-    let usuario = await this.usuarioRepository.findOne({where: {nombre_usuario: restablecerContrasena.nombre_usuario}})
+    let usuario = await this.usuarioRepository.findOne({where: {nombre_usuario: restablecerContrasena.correo}})
     if (!usuario) {
       throw new HttpErrors[401]("Este usuario no existe")
     }
@@ -114,13 +114,12 @@ export class UsuarioController {
     usuario.contrasena = contrasenaCifrada;
     await this.usuarioRepository.update(usuario);
 
-    //Notificación via SMS
-    let contenido =
-      `Usted ha solicitado una nueva contraseña en la plataforma. Sus datos son:
-
-          Usuario: ${usuario.nombre_usuario}
-          Contraseña: ${contrasenaAleatoria}
-        `;
+    //Notificación via email
+    let contenido = `Hola! <br /> Usted ha solicitado una nueva contraseña en la plataforma. Sus datos son: <br />
+        <ul>
+          <li>Usuario: ${usuario.nombre_usuario}</li>
+          <li>Contraseña: ${contrasenaAleatoria}</li>
+        </ul>`;
     this.servicioNotificaciones.EnviarNotificacionPorSMS(usuario.telefono, contenido);
 
     return {

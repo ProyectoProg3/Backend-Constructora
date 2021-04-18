@@ -1,6 +1,6 @@
 import { /* inject, */ BindingScope, injectable} from '@loopback/core';
 import {Keys as llaves} from '../config/keys';
-const sgMail = require('@sendgrid/mail');
+let sgMail = require('@sendgrid/mail');
 var twilio = require('twilio');
 
 
@@ -39,10 +39,10 @@ export class NotificacionesService {
     var client = new twilio(accountSid, authToken);
 
     client.messages.create({
-        body: contenido,
-        to: telefono,  // Text this number
-        from: llaves.twilioPhone // From a valid Twilio number
+        body: 'Hello from Node',
+        to: '+12345678901',  // Text this number
+        from: '+12345678901' // From a valid Twilio number
     })
-    .then((message: any) => console.log(message.sid));
+    .then((message) => console.log(message.sid));
   }
 }

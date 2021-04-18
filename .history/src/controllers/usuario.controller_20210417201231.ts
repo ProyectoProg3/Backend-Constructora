@@ -85,7 +85,7 @@ export class UsuarioController {
     return usuarioCreado;
   }
 
-  @post('/restablecer-contraseña')
+  @post('/reset-password')
   @response(200, {
     description: 'Usuario model instance',
     content: {'application/json': {schema: getModelSchemaRef(RestablecerContrasena)}},
@@ -101,9 +101,9 @@ export class UsuarioController {
     restablecerContrasena: RestablecerContrasena,
   ): Promise<Object> {
 
-    let usuario = await this.usuarioRepository.findOne({where: {nombre_usuario: restablecerContrasena.nombre_usuario}})
-    if (!usuario) {
-      throw new HttpErrors[401]("Este usuario no existe")
+    let usuario = await this.usuarioRepository.findOne({where:{nombre_usuario: restablecerContrasena.correo}})
+    if(!usuario){
+      throw new HttpError[401]("Este usuario no existe")
     }
     let contrasenaAleatoria = this.servicioFunciones.GenerarConstrasenaAleatoria();
     console.log(contrasenaAleatoria);
@@ -112,20 +112,18 @@ export class UsuarioController {
     console.log(contrasenaCifrada);
 
     usuario.contrasena = contrasenaCifrada;
-    await this.usuarioRepository.update(usuario);
-
-    //Notificación via SMS
-    let contenido =
-      `Usted ha solicitado una nueva contraseña en la plataforma. Sus datos son:
-
-          Usuario: ${usuario.nombre_usuario}
-          Contraseña: ${contrasenaAleatoria}
-        `;
-    this.servicioNotificaciones.EnviarNotificacionPorSMS(usuario.telefono, contenido);
-
-    return {
-      envio: "OK"
-    };
+    let usuarioCreado = await this.usuarioRepository.create(usuario);
+    if (usuarioCreado) {
+      //Notificación via email
+      let contenido = `Hola! <br /> Se ha creado para usted un usuario en la plataforma de la Constructora UdeC S.A.S
+        sus credenciales de acceso son: <br />
+        <ul>
+          <li>Usuario: ${usuarioCreado.nombre_usuario}</li>
+          <li>Contraseña: ${contrasenaAleatoria}</li>
+        </ul>`;
+      this.servicioNotificaciones.EnviarCorreoElectronico(usuarioCreado.correo, llaves.asuntoNuevoUsuario, contenido);
+    }
+    return usuarioCreado;
   }
 
   @post('/identificar-usuario')

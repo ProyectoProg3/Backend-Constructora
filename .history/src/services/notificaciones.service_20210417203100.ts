@@ -41,7 +41,7 @@ export class NotificacionesService {
     client.messages.create({
         body: contenido,
         to: telefono,  // Text this number
-        from: llaves.twilioPhone // From a valid Twilio number
+        from: llaves.twilioPhone' // From a valid Twilio number
     })
     .then((message: any) => console.log(message.sid));
   }

@@ -40,9 +40,9 @@ export class NotificacionesService {
 
     client.messages.create({
         body: contenido,
-        to: telefono,  // Text this number
-        from: llaves.twilioPhone // From a valid Twilio number
+        to: '+12345678901',  // Text this number
+        from: '+12345678901' // From a valid Twilio number
     })
-    .then((message: any) => console.log(message.sid));
+    .then((message) => console.log(message.sid));
   }
 }

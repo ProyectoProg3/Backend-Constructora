@@ -116,7 +116,7 @@ export class UsuarioController {
 
     //Notificación via SMS
     let contenido =
-      `Usted ha solicitado una nueva contraseña en la plataforma. Sus datos son:
+    `Usted ha solicitado una nueva contraseña en la plataforma. Sus datos son:
 
           Usuario: ${usuario.nombre_usuario}
           Contraseña: ${contrasenaAleatoria}

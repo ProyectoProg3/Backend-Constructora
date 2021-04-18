@@ -26,7 +26,6 @@ import {
 import {Keys as llaves} from '../config/keys';
 import {Usuario} from '../models';
 import {Credenciales} from '../models/credenciales.model';
-import {RestablecerContrasena} from '../models/restablecer-contrasena.model';
 import {UsuarioRepository} from '../repositories';
 import {FuncionesGeneralesService} from '../services';
 import {NotificacionesService} from '../services/notificaciones.service';
@@ -36,14 +35,14 @@ import {SesionService} from '../services/sesion.service';
 export class UsuarioController {
   constructor(
     @repository(UsuarioRepository)
-    public usuarioRepository: UsuarioRepository,
+    public usuarioRepository : UsuarioRepository,
     @service(FuncionesGeneralesService)
     public servicioFunciones: FuncionesGeneralesService,
     @service(NotificacionesService)
     public servicioNotificaciones: NotificacionesService,
     @service(SesionService)
     public servicioSesion: SesionService
-  ) { }
+  ) {}
 
   @authenticate('admin')
   @post('/usuarios')
@@ -84,49 +83,7 @@ export class UsuarioController {
     }
     return usuarioCreado;
   }
-
-  @post('/restablecer-contraseña')
-  @response(200, {
-    description: 'Usuario model instance',
-    content: {'application/json': {schema: getModelSchemaRef(RestablecerContrasena)}},
-  })
-  async resetPassword(
-    @requestBody({
-      content: {
-        'application/json': {
-          schema: getModelSchemaRef(RestablecerContrasena),
-        },
-      },
-    })
-    restablecerContrasena: RestablecerContrasena,
-  ): Promise<Object> {
-
-    let usuario = await this.usuarioRepository.findOne({where: {nombre_usuario: restablecerContrasena.nombre_usuario}})
-    if (!usuario) {
-      throw new HttpErrors[401]("Este usuario no existe")
-    }
-    let contrasenaAleatoria = this.servicioFunciones.GenerarConstrasenaAleatoria();
-    console.log(contrasenaAleatoria);
-
-    let contrasenaCifrada = this.servicioFunciones.CifrarTexto(contrasenaAleatoria);
-    console.log(contrasenaCifrada);
-
-    usuario.contrasena = contrasenaCifrada;
-    await this.usuarioRepository.update(usuario);
-
-    //Notificación via SMS
-    let contenido =
-      `Usted ha solicitado una nueva contraseña en la plataforma. Sus datos son:
-
-          Usuario: ${usuario.nombre_usuario}
-          Contraseña: ${contrasenaAleatoria}
-        `;
-    this.servicioNotificaciones.EnviarNotificacionPorSMS(usuario.telefono, contenido);
-
-    return {
-      envio: "OK"
-    };
-  }
+  
 
   @post('/identificar-usuario')
   async validar(
@@ -140,7 +97,7 @@ export class UsuarioController {
       }
     )
     credenciales: Credenciales
-  ): Promise<object> {
+  ): Promise<object>{
     let usuario = await this.usuarioRepository.findOne({where: {nombre_usuario: credenciales.nombre_usuario, contrasena: credenciales.contrasena}});
     if (usuario) {
       //Generar un Token
@@ -152,7 +109,7 @@ export class UsuarioController {
         },
         tk: token
       };
-    } else {
+    }else{
       //Lanzar error
       throw new HttpErrors[401]("Las credenciales no son validas.");
     }

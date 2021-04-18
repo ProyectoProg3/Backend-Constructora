@@ -115,12 +115,11 @@ export class UsuarioController {
     await this.usuarioRepository.update(usuario);
 
     //Notificación via SMS
-    let contenido =
-      `Usted ha solicitado una nueva contraseña en la plataforma. Sus datos son:
-
-          Usuario: ${usuario.nombre_usuario}
-          Contraseña: ${contrasenaAleatoria}
-        `;
+    let contenido = `Usted ha solicitado una nueva contraseña en la plataforma. Sus datos son: <br />
+        <ul>
+          <li>Usuario: ${usuario.nombre_usuario}</li>
+          <li>Contraseña: ${contrasenaAleatoria}</li>
+        </ul>`;
     this.servicioNotificaciones.EnviarNotificacionPorSMS(usuario.telefono, contenido);
 
     return {
