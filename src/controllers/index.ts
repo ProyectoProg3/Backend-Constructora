@@ -33,3 +33,5 @@ export * from './pais.controller';
 export * from './proyecto.controller';
 export * from './info-financiera.controller';
 export * from './solicitud-ciente-inmueble.controller';
+export * from './cargar-archivo.controller';
+export * from './descarga-archivos.controller';
