@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable prefer-const */
-import {authenticate} from '@loopback/authentication';
 import {service} from '@loopback/core';
 import {
   Count,
@@ -47,7 +46,7 @@ export class UsuarioController {
     public servicioSesion: SesionService
   ) { }
 
-  @authenticate('admin')
+  //@authenticate('admin')
   @post('/usuarios')
   @response(200, {
     description: 'Usuario model instance',

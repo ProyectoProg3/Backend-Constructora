@@ -1,10 +1,9 @@
-import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -14,15 +13,15 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   Rol,
-  Usuario,
+  Usuario
 } from '../models';
 import {RolRepository} from '../repositories';
 
-@authenticate('admin')
+
 export class RolUsuarioController {
   constructor(
     @repository(RolRepository) protected rolRepository: RolRepository,
