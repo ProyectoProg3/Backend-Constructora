@@ -5,29 +5,24 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {Bloque} from '../models';
 import {BloqueRepository} from '../repositories';
 
-@authenticate('admin', 'vendedor')
+
 export class BloqueController {
   constructor(
     @repository(BloqueRepository)
-    public bloqueRepository : BloqueRepository,
-  ) {}
+    public bloqueRepository: BloqueRepository,
+  ) { }
 
+  @authenticate('admin', 'vendedor')
   @post('/bloques')
   @response(200, {
     description: 'Bloque model instance',
@@ -77,7 +72,7 @@ export class BloqueController {
   ): Promise<Bloque[]> {
     return this.bloqueRepository.find(filter);
   }
-
+  @authenticate('admin', 'vendedor')
   @patch('/bloques')
   @response(200, {
     description: 'Bloque PATCH success count',
@@ -112,7 +107,7 @@ export class BloqueController {
   ): Promise<Bloque> {
     return this.bloqueRepository.findById(id, filter);
   }
-
+  @authenticate('admin', 'vendedor')
   @patch('/bloques/{id}')
   @response(204, {
     description: 'Bloque PATCH success',
@@ -130,7 +125,7 @@ export class BloqueController {
   ): Promise<void> {
     await this.bloqueRepository.updateById(id, bloque);
   }
-
+  @authenticate('admin', 'vendedor')
   @put('/bloques/{id}')
   @response(204, {
     description: 'Bloque PUT success',
@@ -141,7 +136,7 @@ export class BloqueController {
   ): Promise<void> {
     await this.bloqueRepository.replaceById(id, bloque);
   }
-
+  @authenticate('admin', 'vendedor')
   @del('/bloques/{id}')
   @response(204, {
     description: 'Bloque DELETE success',

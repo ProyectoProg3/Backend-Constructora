@@ -16,14 +16,14 @@ import {Pais} from '../models';
 import {PaisRepository} from '../repositories';
 
 
-@authenticate('admin')
+//@authenticate('admin')
 export class PaisController {
   constructor(
     @repository(PaisRepository)
     public paisRepository: PaisRepository,
   ) { }
 
-
+  @authenticate('admin')
   @post('/paises')
   @response(200, {
     description: 'Pais model instance',
@@ -73,7 +73,7 @@ export class PaisController {
   ): Promise<Pais[]> {
     return this.paisRepository.find(filter);
   }
-
+  @authenticate('admin')
   @patch('/paises')
   @response(200, {
     description: 'Pais PATCH success count',
@@ -108,7 +108,7 @@ export class PaisController {
   ): Promise<Pais> {
     return this.paisRepository.findById(id, filter);
   }
-
+  @authenticate('admin')
   @patch('/paises/{id}')
   @response(204, {
     description: 'Pais PATCH success',
@@ -137,7 +137,7 @@ export class PaisController {
   ): Promise<void> {
     await this.paisRepository.replaceById(id, pais);
   }
-
+  @authenticate('admin')
   @del('/paises/{id}')
   @response(204, {
     description: 'Pais DELETE success',

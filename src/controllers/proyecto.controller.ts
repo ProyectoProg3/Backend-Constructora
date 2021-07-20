@@ -5,29 +5,24 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {Proyecto} from '../models';
 import {ProyectoRepository} from '../repositories';
 
-@authenticate('admin', 'vendedor')
+//
 export class ProyectoController {
   constructor(
     @repository(ProyectoRepository)
-    public proyectoRepository : ProyectoRepository,
-  ) {}
+    public proyectoRepository: ProyectoRepository,
+  ) { }
 
+  @authenticate('admin', 'vendedor')
   @post('/proyectos')
   @response(200, {
     description: 'Proyecto model instance',
@@ -77,7 +72,7 @@ export class ProyectoController {
   ): Promise<Proyecto[]> {
     return this.proyectoRepository.find(filter);
   }
-
+  @authenticate('admin', 'vendedor')
   @patch('/proyectos')
   @response(200, {
     description: 'Proyecto PATCH success count',
@@ -112,7 +107,7 @@ export class ProyectoController {
   ): Promise<Proyecto> {
     return this.proyectoRepository.findById(id, filter);
   }
-
+  @authenticate('admin', 'vendedor')
   @patch('/proyectos/{id}')
   @response(204, {
     description: 'Proyecto PATCH success',
@@ -130,7 +125,7 @@ export class ProyectoController {
   ): Promise<void> {
     await this.proyectoRepository.updateById(id, proyecto);
   }
-
+  @authenticate('admin', 'vendedor')
   @put('/proyectos/{id}')
   @response(204, {
     description: 'Proyecto PUT success',
@@ -141,7 +136,7 @@ export class ProyectoController {
   ): Promise<void> {
     await this.proyectoRepository.replaceById(id, proyecto);
   }
-
+  @authenticate('admin', 'vendedor')
   @del('/proyectos/{id}')
   @response(204, {
     description: 'Proyecto DELETE success',

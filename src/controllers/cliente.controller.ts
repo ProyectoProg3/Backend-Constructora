@@ -5,29 +5,24 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {Cliente} from '../models';
 import {ClienteRepository} from '../repositories';
 
-@authenticate('admin', 'vendedor')
+
 export class ClienteController {
   constructor(
     @repository(ClienteRepository)
-    public clienteRepository : ClienteRepository,
-  ) {}
+    public clienteRepository: ClienteRepository,
+  ) { }
 
+  @authenticate('admin', 'vendedor')
   @post('/clientes')
   @response(200, {
     description: 'Cliente model instance',
@@ -77,7 +72,7 @@ export class ClienteController {
   ): Promise<Cliente[]> {
     return this.clienteRepository.find(filter);
   }
-
+  @authenticate('admin', 'vendedor')
   @patch('/clientes')
   @response(200, {
     description: 'Cliente PATCH success count',
@@ -96,7 +91,7 @@ export class ClienteController {
   ): Promise<Count> {
     return this.clienteRepository.updateAll(cliente, where);
   }
-
+  @authenticate('admin', 'vendedor')
   @get('/clientes/{id}')
   @response(200, {
     description: 'Cliente model instance',
@@ -112,7 +107,7 @@ export class ClienteController {
   ): Promise<Cliente> {
     return this.clienteRepository.findById(id, filter);
   }
-
+  @authenticate('admin', 'vendedor')
   @patch('/clientes/{id}')
   @response(204, {
     description: 'Cliente PATCH success',
@@ -130,7 +125,7 @@ export class ClienteController {
   ): Promise<void> {
     await this.clienteRepository.updateById(id, cliente);
   }
-
+  @authenticate('admin', 'vendedor')
   @put('/clientes/{id}')
   @response(204, {
     description: 'Cliente PUT success',
@@ -141,7 +136,7 @@ export class ClienteController {
   ): Promise<void> {
     await this.clienteRepository.replaceById(id, cliente);
   }
-
+  @authenticate('admin', 'vendedor')
   @del('/clientes/{id}')
   @response(204, {
     description: 'Cliente DELETE success',

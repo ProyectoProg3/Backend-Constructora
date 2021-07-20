@@ -15,14 +15,14 @@ import {
 import {Rol} from '../models';
 import {RolRepository} from '../repositories';
 
-@authenticate('admin')
+
 export class RolController {
   constructor(
     @repository(RolRepository)
     public rolRepository: RolRepository,
   ) { }
 
-
+  @authenticate('admin')
   @post('/roles')
   @response(200, {
     description: 'Rol model instance',
@@ -92,6 +92,7 @@ export class RolController {
     return this.rolRepository.updateAll(rol, where);
   }
 
+
   @get('/roles/{id}')
   @response(200, {
     description: 'Rol model instance',
@@ -108,6 +109,7 @@ export class RolController {
     return this.rolRepository.findById(id, filter);
   }
 
+  @authenticate('admin')
   @patch('/roles/{id}')
   @response(204, {
     description: 'Rol PATCH success',
@@ -126,6 +128,7 @@ export class RolController {
     await this.rolRepository.updateById(id, rol);
   }
 
+  @authenticate('admin')
   @put('/roles/{id}')
   @response(204, {
     description: 'Rol PUT success',
@@ -137,6 +140,7 @@ export class RolController {
     await this.rolRepository.replaceById(id, rol);
   }
 
+  @authenticate('admin')
   @del('/roles/{id}')
   @response(204, {
     description: 'Rol DELETE success',

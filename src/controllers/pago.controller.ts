@@ -5,29 +5,23 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {Pago} from '../models';
 import {PagoRepository} from '../repositories';
 
-@authenticate('admin', 'vendedor')
+
 export class PagoController {
   constructor(
     @repository(PagoRepository)
-    public pagoRepository : PagoRepository,
-  ) {}
-
+    public pagoRepository: PagoRepository,
+  ) { }
+  @authenticate('admin', 'vendedor')
   @post('/pagos')
   @response(200, {
     description: 'Pago model instance',
@@ -77,7 +71,7 @@ export class PagoController {
   ): Promise<Pago[]> {
     return this.pagoRepository.find(filter);
   }
-
+  @authenticate('admin', 'vendedor')
   @patch('/pagos')
   @response(200, {
     description: 'Pago PATCH success count',
@@ -112,7 +106,7 @@ export class PagoController {
   ): Promise<Pago> {
     return this.pagoRepository.findById(id, filter);
   }
-
+  @authenticate('admin', 'vendedor')
   @patch('/pagos/{id}')
   @response(204, {
     description: 'Pago PATCH success',
@@ -130,7 +124,7 @@ export class PagoController {
   ): Promise<void> {
     await this.pagoRepository.updateById(id, pago);
   }
-
+  @authenticate('admin', 'vendedor')
   @put('/pagos/{id}')
   @response(204, {
     description: 'Pago PUT success',
@@ -141,7 +135,7 @@ export class PagoController {
   ): Promise<void> {
     await this.pagoRepository.replaceById(id, pago);
   }
-
+  @authenticate('admin', 'vendedor')
   @del('/pagos/{id}')
   @response(204, {
     description: 'Pago DELETE success',

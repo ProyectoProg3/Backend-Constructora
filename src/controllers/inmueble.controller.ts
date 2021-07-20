@@ -5,29 +5,24 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {Inmueble} from '../models';
 import {InmuebleRepository} from '../repositories';
 
-@authenticate('admin', 'vendedor')
+
 export class InmuebleController {
   constructor(
     @repository(InmuebleRepository)
-    public inmuebleRepository : InmuebleRepository,
-  ) {}
+    public inmuebleRepository: InmuebleRepository,
+  ) { }
 
+  @authenticate('admin', 'vendedor')
   @post('/inmuebles')
   @response(200, {
     description: 'Inmueble model instance',
@@ -77,7 +72,7 @@ export class InmuebleController {
   ): Promise<Inmueble[]> {
     return this.inmuebleRepository.find(filter);
   }
-
+  @authenticate('admin', 'vendedor')
   @patch('/inmuebles')
   @response(200, {
     description: 'Inmueble PATCH success count',
@@ -112,7 +107,7 @@ export class InmuebleController {
   ): Promise<Inmueble> {
     return this.inmuebleRepository.findById(id, filter);
   }
-
+  @authenticate('admin', 'vendedor')
   @patch('/inmuebles/{id}')
   @response(204, {
     description: 'Inmueble PATCH success',
@@ -130,7 +125,7 @@ export class InmuebleController {
   ): Promise<void> {
     await this.inmuebleRepository.updateById(id, inmueble);
   }
-
+  @authenticate('admin', 'vendedor')
   @put('/inmuebles/{id}')
   @response(204, {
     description: 'Inmueble PUT success',
@@ -141,7 +136,7 @@ export class InmuebleController {
   ): Promise<void> {
     await this.inmuebleRepository.replaceById(id, inmueble);
   }
-
+  @authenticate('admin', 'vendedor')
   @del('/inmuebles/{id}')
   @response(204, {
     description: 'Inmueble DELETE success',

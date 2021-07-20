@@ -1,22 +1,16 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
-import {authenticate} from '@loopback/authentication';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {SolicitudClienteInmueble} from '../models';
 import {SolicitudClienteInmuebleRepository} from '../repositories';
@@ -25,8 +19,8 @@ import {SolicitudClienteInmuebleRepository} from '../repositories';
 export class SolicitudCienteInmuebleController {
   constructor(
     @repository(SolicitudClienteInmuebleRepository)
-    public solicitudClienteInmuebleRepository : SolicitudClienteInmuebleRepository,
-  ) {}
+    public solicitudClienteInmuebleRepository: SolicitudClienteInmuebleRepository,
+  ) { }
 
   @post('/solicitud-cliente-inmueble')
   @response(200, {
@@ -77,7 +71,7 @@ export class SolicitudCienteInmuebleController {
   ): Promise<SolicitudClienteInmueble[]> {
     return this.solicitudClienteInmuebleRepository.find(filter);
   }
-
+  @authenticate('admin', 'vendedor')
   @patch('/solicitud-cliente-inmueble')
   @response(200, {
     description: 'SolicitudClienteInmueble PATCH success count',
@@ -112,7 +106,7 @@ export class SolicitudCienteInmuebleController {
   ): Promise<SolicitudClienteInmueble> {
     return this.solicitudClienteInmuebleRepository.findById(id, filter);
   }
-
+  @authenticate('admin', 'vendedor')
   @patch('/solicitud-cliente-inmueble/{id}')
   @response(204, {
     description: 'SolicitudClienteInmueble PATCH success',
@@ -130,7 +124,7 @@ export class SolicitudCienteInmuebleController {
   ): Promise<void> {
     await this.solicitudClienteInmuebleRepository.updateById(id, solicitudClienteInmueble);
   }
-
+  @authenticate('admin', 'vendedor')
   @put('/solicitud-cliente-inmueble/{id}')
   @response(204, {
     description: 'SolicitudClienteInmueble PUT success',
@@ -141,7 +135,7 @@ export class SolicitudCienteInmuebleController {
   ): Promise<void> {
     await this.solicitudClienteInmuebleRepository.replaceById(id, solicitudClienteInmueble);
   }
-
+  @authenticate('admin', 'vendedor')
   @del('/solicitud-cliente-inmueble/{id}')
   @response(204, {
     description: 'SolicitudClienteInmueble DELETE success',

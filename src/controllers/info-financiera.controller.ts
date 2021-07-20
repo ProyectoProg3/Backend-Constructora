@@ -5,18 +5,12 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {InfoFinanciera} from '../models';
 import {InfoFinancieraRepository} from '../repositories';
@@ -25,8 +19,8 @@ import {InfoFinancieraRepository} from '../repositories';
 export class InfoFinancieraController {
   constructor(
     @repository(InfoFinancieraRepository)
-    public infoFinancieraRepository : InfoFinancieraRepository,
-  ) {}
+    public infoFinancieraRepository: InfoFinancieraRepository,
+  ) { }
 
   @post('/info-financiera')
   @response(200, {
@@ -77,7 +71,7 @@ export class InfoFinancieraController {
   ): Promise<InfoFinanciera[]> {
     return this.infoFinancieraRepository.find(filter);
   }
-
+  @authenticate('admin', 'vendedor')
   @patch('/info-financiera')
   @response(200, {
     description: 'InfoFinanciera PATCH success count',
@@ -112,7 +106,7 @@ export class InfoFinancieraController {
   ): Promise<InfoFinanciera> {
     return this.infoFinancieraRepository.findById(id, filter);
   }
-
+  @authenticate('admin', 'vendedor')
   @patch('/info-financiera/{id}')
   @response(204, {
     description: 'InfoFinanciera PATCH success',
@@ -130,7 +124,7 @@ export class InfoFinancieraController {
   ): Promise<void> {
     await this.infoFinancieraRepository.updateById(id, infoFinanciera);
   }
-
+  @authenticate('admin', 'vendedor')
   @put('/info-financiera/{id}')
   @response(204, {
     description: 'InfoFinanciera PUT success',
@@ -141,7 +135,7 @@ export class InfoFinancieraController {
   ): Promise<void> {
     await this.infoFinancieraRepository.replaceById(id, infoFinanciera);
   }
-
+  @authenticate('admin', 'vendedor')
   @del('/info-financiera/{id}')
   @response(204, {
     description: 'InfoFinanciera DELETE success',

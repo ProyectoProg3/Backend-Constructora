@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable prefer-const */
+import {authenticate} from '@loopback/authentication';
 import {service} from '@loopback/core';
 import {
   Count,
@@ -46,7 +47,7 @@ export class UsuarioController {
     public servicioSesion: SesionService
   ) { }
 
-  //@authenticate('admin')
+  @authenticate('admin')
   @post('/usuarios')
   @response(200, {
     description: 'Usuario model instance',
@@ -189,7 +190,7 @@ export class UsuarioController {
   ): Promise<Usuario[]> {
     return this.usuarioRepository.find(filter);
   }
-
+  @authenticate('admin')
   @patch('/usuarios')
   @response(200, {
     description: 'Usuario PATCH success count',
@@ -224,7 +225,7 @@ export class UsuarioController {
   ): Promise<Usuario> {
     return this.usuarioRepository.findById(id, filter);
   }
-
+  @authenticate('admin')
   @patch('/usuarios/{id}')
   @response(204, {
     description: 'Usuario PATCH success',
@@ -242,7 +243,7 @@ export class UsuarioController {
   ): Promise<void> {
     await this.usuarioRepository.updateById(id, usuario);
   }
-
+  @authenticate('admin')
   @put('/usuarios/{id}')
   @response(204, {
     description: 'Usuario PUT success',
@@ -254,6 +255,7 @@ export class UsuarioController {
     await this.usuarioRepository.replaceById(id, usuario);
   }
 
+  @authenticate('admin')
   @del('/usuarios/{id}')
   @response(204, {
     description: 'Usuario DELETE success',

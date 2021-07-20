@@ -15,13 +15,14 @@ import {
 import {Ciudad} from '../models';
 import {CiudadRepository} from '../repositories';
 
-@authenticate('admin', 'vendedor')
+
 export class CiudadController {
   constructor(
     @repository(CiudadRepository)
     public ciudadRepository: CiudadRepository,
   ) { }
 
+  @authenticate('admin')
   @post('/ciudades')
   @response(200, {
     description: 'Ciudad model instance',
@@ -107,7 +108,7 @@ export class CiudadController {
   ): Promise<Ciudad> {
     return this.ciudadRepository.findById(id, filter);
   }
-
+  @authenticate('admin')
   @patch('/ciudades/{id}')
   @response(204, {
     description: 'Ciudad PATCH success',
@@ -125,7 +126,7 @@ export class CiudadController {
   ): Promise<void> {
     await this.ciudadRepository.updateById(id, ciudad);
   }
-
+  @authenticate('admin')
   @put('/ciudades/{id}')
   @response(204, {
     description: 'Ciudad PUT success',
@@ -136,7 +137,7 @@ export class CiudadController {
   ): Promise<void> {
     await this.ciudadRepository.replaceById(id, ciudad);
   }
-
+  @authenticate('admin')
   @del('/ciudades/{id}')
   @response(204, {
     description: 'Ciudad DELETE success',
