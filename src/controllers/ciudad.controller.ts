@@ -55,7 +55,7 @@ export class CiudadController {
     return this.ciudadRepository.count(where);
   }
 
-  @authenticate.skip()
+  //@authenticate.skip()
   @get('/ciudades')
   @response(200, {
     description: 'Array of Ciudad model instances',

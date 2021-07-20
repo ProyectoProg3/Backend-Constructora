@@ -15,7 +15,7 @@ import {
 import {InfoFinanciera} from '../models';
 import {InfoFinancieraRepository} from '../repositories';
 
-@authenticate('admin', 'vendedor')
+
 export class InfoFinancieraController {
   constructor(
     @repository(InfoFinancieraRepository)

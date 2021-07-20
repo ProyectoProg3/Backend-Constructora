@@ -4,7 +4,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -14,15 +14,15 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   Ciudad,
-  Cliente,
+  Cliente
 } from '../models';
 import {CiudadRepository} from '../repositories';
 
-@authenticate('admin', 'vendedor')
+
 export class CiudadClienteController {
   constructor(
     @repository(CiudadRepository) protected ciudadRepository: CiudadRepository,
@@ -46,7 +46,7 @@ export class CiudadClienteController {
   ): Promise<Cliente[]> {
     return this.ciudadRepository.clientes(id).find(filter);
   }
-
+  @authenticate('admin')
   @post('/ciudads/{id}/clientes', {
     responses: {
       '200': {
@@ -94,7 +94,7 @@ export class CiudadClienteController {
   ): Promise<Count> {
     return this.ciudadRepository.clientes(id).patch(cliente, where);
   }
-
+  @authenticate('admin')
   @del('/ciudads/{id}/clientes', {
     responses: {
       '200': {

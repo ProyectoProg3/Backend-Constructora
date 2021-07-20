@@ -1,19 +1,16 @@
-import {authenticate} from '@loopback/authentication';
 import {
-  repository,
+  repository
 } from '@loopback/repository';
 import {
-  param,
   get,
-  getModelSchemaRef,
+  getModelSchemaRef, param
 } from '@loopback/rest';
 import {
-  SolicitudClienteInmueble,
-  EstadoSolicitud,
+  EstadoSolicitud, SolicitudClienteInmueble
 } from '../models';
 import {SolicitudClienteInmuebleRepository} from '../repositories';
 
-@authenticate('admin', 'vendedor')
+
 export class SolicitudClienteInmuebleEstadoSolicitudController {
   constructor(
     @repository(SolicitudClienteInmuebleRepository)

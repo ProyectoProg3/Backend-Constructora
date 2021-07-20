@@ -1,10 +1,9 @@
-import { authenticate } from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -14,15 +13,15 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   Ciudad,
-  Proyecto,
+  Proyecto
 } from '../models';
 import {CiudadRepository} from '../repositories';
 
-@authenticate('admin', 'vendedor')
+
 export class CiudadProyectoController {
   constructor(
     @repository(CiudadRepository) protected ciudadRepository: CiudadRepository,

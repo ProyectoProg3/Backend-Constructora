@@ -15,7 +15,7 @@ import {
 import {SolicitudClienteInmueble} from '../models';
 import {SolicitudClienteInmuebleRepository} from '../repositories';
 
-@authenticate('admin', 'vendedor')
+
 export class SolicitudCienteInmuebleController {
   constructor(
     @repository(SolicitudClienteInmuebleRepository)
