@@ -8,7 +8,6 @@ export * from './ciudad-proyecto.controller';
 export * from './ciudad-usuario.controller';
 export * from './ciudad.controller';
 export * from './cliente-ciudad.controller';
-export * from './cliente-info-financiera.controller';
 export * from './cliente-solicitud-cliente-inmueble.controller';
 export * from './cliente.controller';
 export * from './descarga-archivos.controller';

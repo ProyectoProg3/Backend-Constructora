@@ -1,10 +1,10 @@
-import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, BelongsToAccessor, HasManyRepositoryFactory} from '@loopback/repository';
+import {Getter, inject} from '@loopback/core';
+import {BelongsToAccessor, DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
 import {MysqldsDataSource} from '../datasources';
-import {Cliente, ClienteRelations, Ciudad, SolicitudClienteInmueble, InfoFinanciera} from '../models';
+import {Ciudad, Cliente, ClienteRelations, InfoFinanciera, SolicitudClienteInmueble} from '../models';
 import {CiudadRepository} from './ciudad.repository';
-import {SolicitudClienteInmuebleRepository} from './solicitud-cliente-inmueble.repository';
 import {InfoFinancieraRepository} from './info-financiera.repository';
+import {SolicitudClienteInmuebleRepository} from './solicitud-cliente-inmueble.repository';
 
 export class ClienteRepository extends DefaultCrudRepository<
   Cliente,
@@ -22,8 +22,7 @@ export class ClienteRepository extends DefaultCrudRepository<
     @inject('datasources.mysqlds') dataSource: MysqldsDataSource, @repository.getter('CiudadRepository') protected ciudadRepositoryGetter: Getter<CiudadRepository>, @repository.getter('SolicitudClienteInmuebleRepository') protected solicitudClienteInmuebleRepositoryGetter: Getter<SolicitudClienteInmuebleRepository>, @repository.getter('InfoFinancieraRepository') protected infoFinancieraRepositoryGetter: Getter<InfoFinancieraRepository>,
   ) {
     super(Cliente, dataSource);
-    this.infoFinanciera = this.createBelongsToAccessorFor('infoFinanciera', infoFinancieraRepositoryGetter,);
-    this.registerInclusionResolver('infoFinanciera', this.infoFinanciera.inclusionResolver);
+
     this.solicitudesClienteInmueble = this.createHasManyRepositoryFactoryFor('solicitudesClienteInmueble', solicitudClienteInmuebleRepositoryGetter,);
     this.registerInclusionResolver('solicitudesClienteInmueble', this.solicitudesClienteInmueble.inclusionResolver);
     this.ciudad = this.createBelongsToAccessorFor('ciudad', ciudadRepositoryGetter,);
