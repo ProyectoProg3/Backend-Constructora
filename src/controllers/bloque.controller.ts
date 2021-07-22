@@ -22,7 +22,7 @@ export class BloqueController {
     public bloqueRepository: BloqueRepository,
   ) { }
 
-  @authenticate('admin', 'vendedor')
+  @authenticate('admin')
   @post('/bloques')
   @response(200, {
     description: 'Bloque model instance',
@@ -72,7 +72,7 @@ export class BloqueController {
   ): Promise<Bloque[]> {
     return this.bloqueRepository.find(filter);
   }
-  @authenticate('admin', 'vendedor')
+  @authenticate('admin')
   @patch('/bloques')
   @response(200, {
     description: 'Bloque PATCH success count',
@@ -107,7 +107,7 @@ export class BloqueController {
   ): Promise<Bloque> {
     return this.bloqueRepository.findById(id, filter);
   }
-  @authenticate('admin', 'vendedor')
+  @authenticate('admin')
   @patch('/bloques/{id}')
   @response(204, {
     description: 'Bloque PATCH success',
@@ -125,7 +125,7 @@ export class BloqueController {
   ): Promise<void> {
     await this.bloqueRepository.updateById(id, bloque);
   }
-  @authenticate('admin', 'vendedor')
+  @authenticate('admin')
   @put('/bloques/{id}')
   @response(204, {
     description: 'Bloque PUT success',
@@ -136,7 +136,7 @@ export class BloqueController {
   ): Promise<void> {
     await this.bloqueRepository.replaceById(id, bloque);
   }
-  @authenticate('admin', 'vendedor')
+  @authenticate('admin')
   @del('/bloques/{id}')
   @response(204, {
     description: 'Bloque DELETE success',

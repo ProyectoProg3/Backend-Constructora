@@ -22,7 +22,7 @@ export class InmuebleController {
     public inmuebleRepository: InmuebleRepository,
   ) { }
 
-  @authenticate('admin', 'vendedor')
+  @authenticate('admin')
   @post('/inmuebles')
   @response(200, {
     description: 'Inmueble model instance',
@@ -72,7 +72,7 @@ export class InmuebleController {
   ): Promise<Inmueble[]> {
     return this.inmuebleRepository.find(filter);
   }
-  @authenticate('admin', 'vendedor')
+  @authenticate('admin')
   @patch('/inmuebles')
   @response(200, {
     description: 'Inmueble PATCH success count',
@@ -107,7 +107,7 @@ export class InmuebleController {
   ): Promise<Inmueble> {
     return this.inmuebleRepository.findById(id, filter);
   }
-  @authenticate('admin', 'vendedor')
+  @authenticate('admin')
   @patch('/inmuebles/{id}')
   @response(204, {
     description: 'Inmueble PATCH success',
@@ -125,7 +125,7 @@ export class InmuebleController {
   ): Promise<void> {
     await this.inmuebleRepository.updateById(id, inmueble);
   }
-  @authenticate('admin', 'vendedor')
+  @authenticate('admin')
   @put('/inmuebles/{id}')
   @response(204, {
     description: 'Inmueble PUT success',
@@ -136,7 +136,7 @@ export class InmuebleController {
   ): Promise<void> {
     await this.inmuebleRepository.replaceById(id, inmueble);
   }
-  @authenticate('admin', 'vendedor')
+  @authenticate('admin')
   @del('/inmuebles/{id}')
   @response(204, {
     description: 'Inmueble DELETE success',

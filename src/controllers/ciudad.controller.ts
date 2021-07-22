@@ -73,7 +73,7 @@ export class CiudadController {
   ): Promise<Ciudad[]> {
     return this.ciudadRepository.find(filter);
   }
-
+  @authenticate('admin')
   @patch('/ciudades')
   @response(200, {
     description: 'Ciudad PATCH success count',

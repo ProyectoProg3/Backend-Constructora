@@ -42,6 +42,9 @@ export class Cliente extends Entity {
 
   @property({
     type: 'date',
+    jsonSchema: {
+      format: 'date', //This can be changed to 'date-time', 'time' or 'date'
+    },
     required: true,
   })
   fechaNacimiento: string;
