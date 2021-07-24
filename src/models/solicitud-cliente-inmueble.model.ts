@@ -2,7 +2,6 @@ import {belongsTo, Entity, model, property} from '@loopback/repository';
 import {Cliente} from './cliente.model';
 import {EstadoSolicitud} from './estado-solicitud.model';
 import {Inmueble} from './inmueble.model';
-import {Pago} from './pago.model';
 
 @model({
   settings: {
@@ -59,8 +58,6 @@ export class SolicitudClienteInmueble extends Entity {
   @belongsTo(() => Inmueble)
   inmuebleId: number;
 
-  @belongsTo(() => Pago)
-  pagoId: number;
 
   @belongsTo(() => EstadoSolicitud)
   estadoSolicitudId: number;

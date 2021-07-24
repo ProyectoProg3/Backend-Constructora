@@ -22,6 +22,7 @@ export class InfoFinancieraController {
     public infoFinancieraRepository: InfoFinancieraRepository,
   ) { }
 
+  @authenticate('admin', 'vendedor')
   @post('/info-financiera')
   @response(200, {
     description: 'InfoFinanciera model instance',

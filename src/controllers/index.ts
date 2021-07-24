@@ -31,7 +31,6 @@ export * from './solicitud-ciente-inmueble.controller';
 export * from './solicitud-cliente-inmueble-cliente.controller';
 export * from './solicitud-cliente-inmueble-estado-solicitud.controller';
 export * from './solicitud-cliente-inmueble-inmueble.controller';
-export * from './solicitud-cliente-inmueble-pago.controller';
 export * from './usuario-ciudad.controller';
 export * from './usuario-rol.controller';
 export * from './usuario.controller';
